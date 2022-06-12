@@ -10,7 +10,7 @@ export class Buscar_Doctor_por_Especialidad_PG implements DoctorRepository{
         try {
      
              const getRegistros = await pool.query(
-                 "select d.* "+
+                 "select d.*, e.* "+
                  "from especialidad e, doctor_especialidad de, doctor d "+
                  "where e.nombre=$1 and e.id=de.fk_especialidad and de.fk_doctor=d.id",[params]);
      

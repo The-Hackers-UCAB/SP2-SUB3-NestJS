@@ -1,8 +1,8 @@
 import { Controller, Get, Res, HttpStatus, Param} from '@nestjs/common';
 import { json } from 'stream/consumers';
 import { AppService } from './app.service';
-import { BuscarDoctoresPG } from './Api Doctor/PostgreSQLRepository/BuscarDoctoresPG';
-import { Buscar_Doctor_por_Especialidad_PG } from './Api Doctor/PostgreSQLRepository/BuscarEspecialidadPG';
+import { BuscarDoctoresPG } from './Api Doctor/PostgreSQLRepository/Buscar_Doctores_PG';
+import { Buscar_Doctor_por_Especialidad_PG } from './Api Doctor/PostgreSQLRepository/Buscar_Doctor_Por_Especialidad_PG';
 
 @Controller()
 export class AppController {
