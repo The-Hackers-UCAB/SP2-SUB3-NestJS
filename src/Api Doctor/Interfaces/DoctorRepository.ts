@@ -1,3 +1,3 @@
 export interface DoctorRepository{
-    BuscarDoctor: (params) => Promise<void>;
+    buscarDoctor: (params) => Promise<void>;
 }

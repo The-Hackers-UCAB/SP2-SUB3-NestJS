@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
-const pool = require('../DB/ConectarBD');
+import { async } from 'rxjs';
+const pool = require('../DB/ConectarPG');
 import { DoctorRepository } from '../Interfaces/DoctorRepository';
 
 @Injectable()
 export class BuscarDoctoresPG implements DoctorRepository{
   
-  BuscarDoctor = async (params) => {
+  buscarDoctor = async (params) => {
 
    try {
 
@@ -20,6 +21,25 @@ export class BuscarDoctoresPG implements DoctorRepository{
     }
     
   }
-  
+
+  getIdDoctores = async () => {
+
+    try {
+
+      var idDoctores: Array<number> = [];
+
+      const getRegistros = await pool.query(
+          "SELECT id FROM doctor"
+      );
+
+      for(var i = 0; i<getRegistros.rows.length; i++)
+        idDoctores.push(getRegistros.rows[i].id);
+      
+      return idDoctores;
+      
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
   
 }
