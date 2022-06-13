@@ -1,5 +1,5 @@
 import { DoctorDTO } from "../dto/doctor.dto";
-import { ORM } from "../Interfaces/IOrm";
+import { ORM } from "../Interfaces/Iorm";
 
 export class DoctorORM implements ORM{
 
