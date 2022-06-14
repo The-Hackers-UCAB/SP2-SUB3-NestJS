@@ -1,4 +1,6 @@
 import { Controller, Get, Res, HttpStatus, Param} from '@nestjs/common';
+import { DoctorEspecialidad_Bussiness_Service_Handlers } from 'src/Api Doctor/Bussiness_Service_Handlers/DoctorEspecialidad_Bussiness_Service_Handlers';
+import { Doctor_Bussiness_Service_Handler } from 'src/Api Doctor/Bussiness_Service_Handlers/Doctor_Bussiness_Service_Handler';
 import { DoctorDTO } from 'src/Api Doctor/dto/doctor.dto';
 import { DoctorORM } from 'src/Api Doctor/ORM/doctor.orm';
 import { BuscarDoctoresPG } from 'src/Api Doctor/PostgreSQLRepository/Buscar_Doctores_PG';
@@ -9,24 +11,13 @@ export class DoctorController{
 
     @Get('')
     async getDoctors(@Res() res){ 
-        var auxiliar = new BuscarDoctoresPG();
-        const doctores = await auxiliar.buscarDoctor(null);
-        const idDoctores = await auxiliar.getIdDoctores();
-        var doctorORM = new DoctorORM();
-        doctorORM.mapper(doctores,idDoctores);
-        return res.status(HttpStatus.OK).json(doctorORM.getDoctores());
+        var auxiliar = new Doctor_Bussiness_Service_Handler();
+        return res.status(HttpStatus.OK).json( await auxiliar.handler(null) );
     }
 
     @Get('/especialidad/:valor')
     async getDoctor_por_especialidad(@Res() res, @Param('valor') valor){
-        var auxiliar1 = new Buscar_Doctor_por_Especialidad_PG();
-        var auxiliar2 = new BuscarDoctoresPG();
-        const doctores_por_especialidad = await auxiliar1.buscarDoctor(valor);
-        var doctorORM = new DoctorORM();
-        for(var i = 0; i < doctores_por_especialidad.length; i++){
-            var doctores = await auxiliar2.getOneDoctor(doctores_por_especialidad[i].id);
-            doctorORM.mapper(doctores,null);
-        }
-        return res.status(HttpStatus.OK).json(doctorORM.getDoctores())
+        var auxiliar = new DoctorEspecialidad_Bussiness_Service_Handlers();
+        return res.status(HttpStatus.OK).json( await auxiliar.handler(valor) );
     }
 }
