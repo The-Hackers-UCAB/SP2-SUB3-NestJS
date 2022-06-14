@@ -6,6 +6,7 @@ Servicio Web en NestJS para la entrega del 2do ShortPaper de la materia Desarrol
 
 ## Instalación
 
+0. Crear y llenar la base de datos relacional con los [scripts](DB/scripts) SQL
 1. Llenar el archivo **".env.template"** y cambiarle el nombre a **".env"**
 2. Ejecutar el comando **npm i**
 3. Ejecutar el comando **npm start**
