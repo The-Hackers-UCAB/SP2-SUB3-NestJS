@@ -1,8 +1,8 @@
-import { IBussiness_Service_Handler } from "../Interfaces/IBussiness_Service_Handler";
+import { IBusiness_Service_Handler } from "../Interfaces/IBusiness_Service_Handler";
 import { DoctorORM } from "../ORM/doctor.orm";
 import { BuscarDoctoresPG } from "../PostgreSQLRepository/Buscar_Doctores_PG";
 
-export class Doctor_Bussiness_Service_Handler implements IBussiness_Service_Handler{
+export class Doctor_Business_Service_Handler implements IBusiness_Service_Handler{
 
     async handler(params) {
         var request = new BuscarDoctoresPG();
