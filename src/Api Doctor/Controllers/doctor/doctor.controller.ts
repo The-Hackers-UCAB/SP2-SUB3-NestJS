@@ -27,7 +27,6 @@ export class DoctorController{
             var doctores = await auxiliar2.getOneDoctor(doctores_por_especialidad[i].id);
             doctorORM.mapper(doctores,null);
         }
-        console.log(doctorORM.getDoctores());
         return res.status(HttpStatus.OK).json(doctorORM.getDoctores())
     }
 }
