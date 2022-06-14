@@ -26,20 +26,37 @@ export class BuscarDoctoresPG implements DoctorRepository{
 
     try {
 
-      var idDoctores: Array<number> = [];
+        var idDoctores: Array<number> = [];
 
-      const getRegistros = await pool.query(
-          "SELECT id FROM doctor"
-      );
+        const getRegistros = await pool.query(
+            "SELECT id FROM doctor"
+        );
 
-      for(var i = 0; i<getRegistros.rows.length; i++)
-        idDoctores.push(getRegistros.rows[i].id);
-      
-      return idDoctores;
+        for(var i = 0; i<getRegistros.rows.length; i++)
+          idDoctores.push(getRegistros.rows[i].id);
+        
+        return idDoctores;
       
     } catch (err) {
       console.log(err.message);
     }
   }
+
+  getOneDoctor = async (id) => {
+
+    try {
+ 
+         const getRegistros = await pool.query(
+             "select d.*, e.nombre as Especialidad "+
+             "from especialidad e, doctor_especialidad de, doctor d "+
+             "where d.id=$1 and e.id=de.fk_especialidad and de.fk_doctor=d.id",[id]);
+ 
+         return getRegistros.rows;
+         
+     } catch (err) {
+         console.log(err.message);
+     }
+     
+}
   
 }
