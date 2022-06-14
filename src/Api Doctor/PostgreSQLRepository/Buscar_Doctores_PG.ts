@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { async } from 'rxjs';
-const pool = require('../DB/ConectarPG');
+import { BD_PG } from '../DB/BD_PG';
 import { DoctorRepository } from '../Interfaces/DoctorRepository';
 
 @Injectable()
-export class BuscarDoctoresPG implements DoctorRepository{
+export class BuscarDoctoresPG extends BD_PG implements DoctorRepository{
   
   buscarDoctor = async (params) => {
 
    try {
 
-        const getRegistros = await pool.query(
+        const getRegistros = await this.pool.query(
             "SELECT d.*, e.nombre as Especialidad FROM doctor d, doctor_especialidad de, especialidad e WHERE e.id=de.fk_especialidad and de.fk_doctor=d.id"
         );
 
         return getRegistros.rows;
+
         
     } catch (err) {
         console.log(err.message);
@@ -28,7 +28,7 @@ export class BuscarDoctoresPG implements DoctorRepository{
 
         var idDoctores: Array<number> = [];
 
-        const getRegistros = await pool.query(
+        const getRegistros = await this.pool.query(
             "SELECT id FROM doctor"
         );
 
@@ -46,7 +46,7 @@ export class BuscarDoctoresPG implements DoctorRepository{
 
     try {
  
-         const getRegistros = await pool.query(
+         const getRegistros = await this.pool.query(
              "select d.*, e.nombre as Especialidad "+
              "from especialidad e, doctor_especialidad de, doctor d "+
              "where d.id=$1 and e.id=de.fk_especialidad and de.fk_doctor=d.id",[id]);

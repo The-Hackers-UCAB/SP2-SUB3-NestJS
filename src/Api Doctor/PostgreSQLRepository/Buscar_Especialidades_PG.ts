@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
-const pool = require('../DB/ConectarPG');
+import { BD_PG } from '../DB/BD_PG';
+
 
 @Injectable()
-export class BuscarEspecialidadPG {
+export class BuscarEspecialidadPG extends BD_PG {
   
     buscarEspecialidad = async () => {
 
     try {
 
-            const getRegistros = await pool.query(
+            const getRegistros = await this.pool.query(
                 "SELECT  e.nombre as Especialidad FROM especialidad e"
             );
 
