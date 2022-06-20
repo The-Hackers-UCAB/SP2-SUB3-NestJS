@@ -1,7 +1,7 @@
 require('dotenv').config();
 const Pool = require('pg').Pool;
 
-export class BD_PG{
+export  abstract class BD_PG{
     
     protected pool = new Pool({
         user: process.env.POSTGRES_USER,
