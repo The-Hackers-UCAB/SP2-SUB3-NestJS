@@ -9,8 +9,9 @@ on:
       - master    
 
 jobs:
-  name: Run tests
+  
   test-job:
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
     - name: Checkout

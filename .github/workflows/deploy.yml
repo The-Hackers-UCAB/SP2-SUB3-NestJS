@@ -1,8 +1,9 @@
 name: Deploy
 
 jobs:
-  name: Deploy app to Heroku
+
   build:
+    name: Deploy app to Heroku
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
