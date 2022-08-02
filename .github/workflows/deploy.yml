@@ -1,7 +1,14 @@
 name: Deploy
 
-jobs:
+on:
+  push:
+    branches:
+      - master
 
+jobs:
+  test: 
+      uses: ./.github/workflows/test.yml
+  
   build:
     name: Deploy app to Heroku
     runs-on: ubuntu-latest
