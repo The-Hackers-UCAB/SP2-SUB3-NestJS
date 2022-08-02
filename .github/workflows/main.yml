@@ -6,10 +6,10 @@ on:
       - master
 
 jobs:
-  test: 
-    uses: ./.github/workflows/test.yml
+  # test: 
+  #   uses: ./.github/workflows/test.yml
 
   build:
-    uses: .github/workflows/deploy.yml
+    uses: .github/workflows/deploy.yml@main
 
 
